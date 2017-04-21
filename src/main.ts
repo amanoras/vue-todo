@@ -3,11 +3,13 @@
 import Vue from "vue";
 import router from "./router";
 
-import App from "./app";
+import App from "./app.vue";
+import Todos from "./components/todos.vue"
+import { Todo } from "@/todos"
 
 new Vue({
   el: "#app",
-  router,
-  template: "<App/>",
-  components: { App },
+  //router,
+  template: "<App />",
+  components: { App }
 });

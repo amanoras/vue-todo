@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Todos from "@/components/todos";
-import TodoDetails from "@/components/todo-details";
+import Todos from "@/components/todos.vue";
 
 Vue.use(Router);
 
@@ -11,11 +10,7 @@ export default new Router({
       path: '/',
       name: 'Todos',
       component: Todos,
+      props: true
     },
-    {
-      path: '/todo/{id}',
-      name: 'TodoDetails',
-      component: TodoDetails,
-    }
   ],
 });

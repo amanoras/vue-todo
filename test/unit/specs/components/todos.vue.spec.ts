@@ -1,4 +1,4 @@
-import { expect, assert } from "chai";
+import { expect } from "chai";
 import render from "@/../test/helpers/render";
 
 import Vue from "vue";

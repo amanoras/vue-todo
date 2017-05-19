@@ -15,6 +15,7 @@
     "vue-router": "^2.2.0"
   },
   "devDependencies": {
+    "@types/chai": "^3.5.2",
     "@types/mocha": "^2.2.33",
     "@types/sinon": "^2.2.2",
     "@types/sinon-chai": "^2.7.27",

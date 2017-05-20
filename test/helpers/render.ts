@@ -1,10 +1,10 @@
 import Vue from "vue";
 
 export default function(component: Vue.Component): Vue {
-    const vm = new Vue({
-      el: document.createElement("div"),
-      render: (h) => h(component)
-    });
+    const ctor = Vue.extend(component),
+          vm = new ctor();
+    
+    vm.$mount();
 
     return vm;
 }

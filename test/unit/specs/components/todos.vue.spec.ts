@@ -8,7 +8,7 @@ describe("todos.vue", () => {
   let vm: Vue,
       todos: Element | null;
 
-  beforeEach(() => {
+  beforeAll(() => {
     vm = render(Todos);
     todos = vm.$el;
   });

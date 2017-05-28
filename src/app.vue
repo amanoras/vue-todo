@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <todos :todos="todoList" v-on:todoAdded="addTodo"/>
+    <router-view></router-view>
   </div>
   </div>
 </template>

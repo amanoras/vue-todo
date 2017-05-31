@@ -1,16 +1,22 @@
 import render from "@/../test/helpers/render";
 
 import Vue from "vue";
+import Vuex from "vuex";
+import { state, mutations } from "@/../test/helpers/mock_store"
 import TodoList from "@/components/todo-list.vue";
 import { Todo } from "@/todos"
 
 describe("todo-list.vue", () => {
-    let vm: Vue,
-        todoList: Element | null;
+    let vm: any,
+        todoList: Element;
 
     describe("component setup", () => {
         beforeAll(() => {
-            vm = render(TodoList);
+            let mock_store = new Vuex.Store({
+                state,
+                mutations
+            })
+            vm = render(TodoList, { store: mock_store });
             todoList = vm.$el;
         });
 
@@ -45,7 +51,14 @@ describe("todo-list.vue", () => {
     
     describe("todo items", () => {
         it("should have no rows when todos is empty", () => {
-            vm = render(TodoList);
+            let mock_state = {
+                    todoList: new Array<Todo>()
+                },
+                mock_store = new Vuex.Store({
+                state: mock_state, 
+                mutations
+            });
+            vm = render(TodoList, { store: mock_store });
             todoList = vm.$el;
 
             expect(todoList.querySelectorAll("tbody>tr").length).toBe(0);
@@ -53,13 +66,15 @@ describe("todo-list.vue", () => {
 
         it("should have rows when todos is not empty", () => {
             let todos = [new Todo(1, "Do something", false), new Todo(2, "Do something else", false)],
-                options = {
-                    data: {
-                        todos
-                    }
-                };
-
-            vm = render(TodoList, options);
+                mock_state = {
+                    todoList: todos
+                },
+                mock_store = new Vuex.Store({
+                    state: mock_state, 
+                    mutations
+                });
+            
+            vm = render(TodoList, { store: mock_store });
             todoList = vm.$el;
 
             expect(todoList.querySelectorAll("tbody>tr").length).toBe(2);

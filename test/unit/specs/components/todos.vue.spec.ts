@@ -1,6 +1,8 @@
 import render from "@/../test/helpers/render";
 
 import Vue from "vue";
+import Vuex from "vuex";
+import { state, mutations } from "@/../test/helpers/mock_store"
 import Todos from "@/components/todos.vue";
 import { Todo } from "@/todos"
 
@@ -9,7 +11,11 @@ describe("todos.vue", () => {
       todos: Element | null;
 
   beforeAll(() => {
-    vm = render(Todos);
+    let mock_store = new Vuex.Store({
+        state,
+        mutations
+    })
+    vm = render(Todos, { store: mock_store });
     todos = vm.$el;
   });
 

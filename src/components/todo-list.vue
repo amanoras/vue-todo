@@ -1,4 +1,4 @@
-<template> 
+<template>
   <table class="table table-striped table-bordered">
     <thead>
     <tr>
@@ -19,15 +19,14 @@ import TodoItem from "./todo-item.vue"
 import { Todo } from "@/todos"
 
 @Component({
-  props: {
-    todos: Array
-  },
   components: {
     TodoItem
   }
 })
 export default class TodoList extends Vue {
-
+  get todos(){
+    return this.$store.state.todoList;
+  };
 };
 </script>
 

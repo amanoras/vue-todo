@@ -2,20 +2,26 @@ import render from "@/../test/helpers/render";
 
 import Vue from "vue";
 import TodoItem from "@/components/todo-item.vue";
+import Vuex from "vuex";
+import { state, mutations } from "@/../test/helpers/mock_store"
+
 import { Todo } from "@/todos"
 
 describe("todo-item.vue", () => {
-    let vm: Vue,
+    let vm: any,
         todoItem: HTMLElement;
 
     describe("component setup", () => {
         beforeAll(() => {
             let options = {
-                data: {
+                propsData: {
                     todo: new Todo(1, "Something", false)
-                }
+                },
+                store: new Vuex.Store({
+                    state,
+                    mutations
+                })
             };
-            
             vm = render(TodoItem, options);
             todoItem = vm.$el;
         });
@@ -25,8 +31,6 @@ describe("todo-item.vue", () => {
         });
         
         it("should render the root container as a TR", () => {
-            console.log(todoItem);
-
             if(todoItem != null){
                 expect(todoItem.tagName).toBe("TR");
             }
@@ -36,9 +40,13 @@ describe("todo-item.vue", () => {
     describe("todo item", () => {
         it("should display the todo name", () => {
             let options = {
-                data: {
+                propsData: {
                     todo: new Todo(1, "Something", false)
-                }
+                },
+                store: new Vuex.Store({
+                    state,
+                    mutations
+                })
             };
             vm = render(TodoItem, options);
             todoItem = vm.$el;
@@ -46,12 +54,28 @@ describe("todo-item.vue", () => {
             expect(todoItem.querySelectorAll("tr>td")[0].textContent).toBe("Something");
         });
 
+        describe("toggling the checkbox", () => {
+            beforeEach(() => {
+                spyOn(vm.$store, "commit");
+            });
+
+            it("should call commit when the done setter is called", () => {
+                vm.done = true;
+
+                expect(vm.$store.commit).toHaveBeenCalled();
+            });
+        });
+
         describe("when todo.done is true", () => {
             beforeEach(() => {
                 let options = {
-                    data: {
+                    propsData: {
                         todo: new Todo(1, "Something", true)
-                    }
+                    },
+                    store: new Vuex.Store({
+                        state,
+                        mutations
+                    })
                 };
                 vm = render(TodoItem, options);
                 todoItem = vm.$el;
@@ -67,7 +91,7 @@ describe("todo-item.vue", () => {
                 expect(target).toBeTruthy();
             });
 
-            it("should set check the checkbox when todo.done is true", () => {
+            it("should check the checkbox when todo.done is true", () => {
                 let target: HTMLInputElement | null = null,
                     checked = false;
 
@@ -83,9 +107,13 @@ describe("todo-item.vue", () => {
         describe("when todo.done is false", () => {
             beforeEach(() => {
                 let options = {
-                    data: {
+                    propsData: {
                         todo: new Todo(1, "Something", false)
-                    }
+                    },
+                    store: new Vuex.Store({
+                        state,
+                        mutations
+                    })
                 };
                 vm = render(TodoItem, options);
                 todoItem = vm.$el;

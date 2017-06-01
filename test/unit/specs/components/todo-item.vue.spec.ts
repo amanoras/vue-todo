@@ -1,8 +1,9 @@
 import render from "@/../test/helpers/render";
 
 import Vue from "vue";
-import TodoItem from "@/components/todo-item.vue";
 import Vuex from "vuex";
+
+import TodoItem from "@/components/todo-item.vue";
 import { state, mutations } from "@/../test/helpers/mock_store"
 
 import { Todo } from "@/todos"
@@ -113,7 +114,8 @@ describe("todo-item.vue", () => {
                     store: new Vuex.Store({
                         state,
                         mutations
-                    })
+                    }),
+                    
                 };
                 vm = render(TodoItem, options);
                 todoItem = vm.$el;

@@ -5,6 +5,18 @@ import { Todo } from "@/todos"
 
 Vue.use(Vuex);
 
+export const getters = {
+  getTodo: (state: any, getters: any) => (id: Number) : Todo | undefined => {
+    let todos: Array<Todo> = state.todoList;
+
+    let todo = todos.find((todo) => {
+      return todo.id == id;
+    });
+
+    return todo;
+  }
+};
+
 export const mutations = {
   addTodo(state: any, payload: any){
       let todo = new Todo(state.todoList.length + 1, payload.name, false);
@@ -13,6 +25,12 @@ export const mutations = {
   toggleStatus(state: any, payload: any) {
       let index = payload.id - 1;
       state.todoList[index].done = !state.todoList[index].done;
+  },
+  updateTodo(state: any, payload: any){
+      let index = payload.id - 1;
+      state.todoList[index].done = payload.done;
+      state.todoList[index].name = payload.name;
+      
   }
 };
 
@@ -20,5 +38,7 @@ export default new Vuex.Store({
   state: {
     todoList: new Array<Todo>()
   },
-  mutations
+  getters,
+  mutations,
+  strict: true
 });

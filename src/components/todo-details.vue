@@ -14,7 +14,10 @@ import Component from "vue-class-component";
   }
 })
 export default class TodoDetail extends Vue {
-  
+  get todo(){
+    console.log(this.$store.getters);
+    return this.$store.getters.getTodo(this.id);
+  }
 };
 </script>
 

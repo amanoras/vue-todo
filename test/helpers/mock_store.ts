@@ -8,6 +8,12 @@ export const state = {
     todoList: new Array<Todo>()
 };
 
+export const getters = {
+    getTodo: (state: any) => (id: Number): Todo | undefined => {
+        return;
+    }
+}
+
 export const mutations = {
     addTodo(state: any, payload: any){
 

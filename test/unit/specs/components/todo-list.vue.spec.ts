@@ -2,6 +2,7 @@ import render from "@/../test/helpers/render";
 
 import Vue from "vue";
 import Vuex from "vuex";
+
 import { state, mutations } from "@/../test/helpers/mock_store"
 import TodoList from "@/components/todo-list.vue";
 import { Todo } from "@/todos"

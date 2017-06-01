@@ -32,5 +32,6 @@ export default new Vuex.Store({
   state: {
     todoList: new Array<Todo>()
   },
+  getters,
   mutations
 });

@@ -17,10 +17,12 @@ import { Todo } from "@/todos"
 export default class AddTodo extends Vue {
     name = "";
 
-    addTodo(){
-        this.$emit("todoAdded", this.name);
-        this.name = "";
-        
+    addTodo(): void {
+      this.$store.commit({
+        type: "addTodo", 
+        name: this.name
+      });
+       this.name = "";
     }
 };
 </script>

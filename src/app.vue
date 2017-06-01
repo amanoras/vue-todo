@@ -9,7 +9,6 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import Todos from "./components/todos.vue"
-import { Todo } from "@/todos"
 
 @Component({
   components: {
@@ -18,11 +17,7 @@ import { Todo } from "@/todos"
 })
 export default class App extends Vue {
   name =  "app";
-  todoList: Array<Todo> = [];
-  addTodo(name: string){
-      let todo = new Todo(this.todoList.length + 1, name, false);
-      this.todoList.push(todo);
-  }
+  
 };
 </script>
 

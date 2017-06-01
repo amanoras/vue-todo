@@ -1,6 +1,7 @@
 import render from "@/../test/helpers/render";
-
 import Vue from "vue";
+import Vuex from "vuex";
+import { state, mutations } from "@/../test/helpers/mock_store"
 import AddTodo from "@/components/add-todo.vue";
 import { Todo } from "@/todos"
 
@@ -10,7 +11,11 @@ describe("add-todo.vue", () => {
 
     describe("The Add Item UI", () => {
         beforeEach(() => {
-            vm = render(AddTodo);
+            let mock_store = new Vuex.Store({
+                state,
+                mutations
+            });
+            vm = vm = render(AddTodo, { store: mock_store });
             addTodo = vm.$el;
         });
 
@@ -45,7 +50,11 @@ describe("add-todo.vue", () => {
         let todoButton: HTMLElement | null;
 
         beforeEach(() => {
-            vm = render(AddTodo);
+            let mock_store = new Vuex.Store({
+                state,
+                mutations
+            });
+            vm = vm = render(AddTodo, { store: mock_store });
             addTodo = vm.$el;
             todoButton = <HTMLElement> vm.$el.querySelector("input[type=button]")
         });
@@ -54,15 +63,15 @@ describe("add-todo.vue", () => {
             expect(todoButton).toBeDefined();
         });
 
-        it("should emit an event when the button is clicked", () => {
-            spyOn(vm, "$emit");
+        it("should call commit on the store when the button is clicked", () => {
+            spyOn(vm.$store, "commit");
 
             if(todoButton != null){
                 todoButton.click();
             }
 
             
-            expect(vm.$emit).toHaveBeenCalled();
+            expect(vm.$store.commit).toHaveBeenCalled();
         });
 
         it("should reset name", () => {

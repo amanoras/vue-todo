@@ -8,7 +8,11 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 
-@Component
+@Component({
+  props: {
+    id: Number
+  }
+})
 export default class TodoDetail extends Vue {
   
 };

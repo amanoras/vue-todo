@@ -1,4 +1,4 @@
-import store, { mutations } from "@/store";
+import store, { mutations, getters } from "@/store";
 import { Todo } from "@/todos"
 
 describe("Todo Store", () => {
@@ -58,6 +58,32 @@ describe("Todo Store", () => {
                 mutations.toggleStatus(state, payload);
 
                 expect(state.todoList[0].done).toBe(true);
+            });
+        });
+    });
+
+    describe("getters", () => {
+        describe("getTodo", () => {
+            let state: any = {};
+
+            beforeEach(() => {
+                state.todoList = [ 
+                    new Todo(1, "Something", false),
+                    new Todo(2, "Something else", false)
+                ];
+            });
+
+            it("should return the todo with the matching ID", () => {
+                let todo = getters.getTodo(state, null)(1);
+
+                expect(todo).toBeDefined();
+                expect(todo).toEqual(state.todoList[0]);
+            });
+
+            it("should return undefined if the todo cannot be found", () => {
+                let todo = getters.getTodo(state, null)(0);
+
+                expect(todo).toBeUndefined();
             });
         });
     });

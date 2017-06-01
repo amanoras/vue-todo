@@ -5,6 +5,18 @@ import { Todo } from "@/todos"
 
 Vue.use(Vuex);
 
+export const getters = {
+  getTodo: (state: any, getters: any) => (id: Number) : Todo | undefined => {
+    let todos: Array<Todo> = state.todoList;
+
+    let todo = todos.find((todo) => {
+      return todo.id == id;
+    });
+
+    return todo;
+  }
+};
+
 export const mutations = {
   addTodo(state: any, payload: any){
       let todo = new Todo(state.todoList.length + 1, payload.name, false);

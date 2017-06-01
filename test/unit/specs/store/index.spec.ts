@@ -60,6 +60,29 @@ describe("Todo Store", () => {
                 expect(state.todoList[0].done).toBe(true);
             });
         });
+
+        describe("updateTodo", () => {
+            beforeEach(() => {
+                payload = { 
+                    id: 1,
+                    name: "Something else",
+                    done: true
+                };
+                state.todoList = [ new Todo(1, "Something", false) ];
+            });
+
+            it("should update name", () => {
+                mutations.updateTodo(state, payload);
+
+                expect(state.todoList[0].name).toBe(payload.name);
+            });
+
+            it("should update done", () => {
+                mutations.updateTodo(state, payload);
+
+                expect(state.todoList[0].done).toBe(payload.done);
+            });
+        });
     });
 
     describe("getters", () => {

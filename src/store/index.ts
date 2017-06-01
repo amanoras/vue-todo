@@ -25,6 +25,12 @@ export const mutations = {
   toggleStatus(state: any, payload: any) {
       let index = payload.id - 1;
       state.todoList[index].done = !state.todoList[index].done;
+  },
+  updateTodo(state: any, payload: any){
+      let index = payload.id - 1;
+      state.todoList[index].done = payload.done;
+      state.todoList[index].name = payload.name;
+      
   }
 };
 
@@ -33,5 +39,6 @@ export default new Vuex.Store({
     todoList: new Array<Todo>()
   },
   getters,
-  mutations
+  mutations,
+  strict: true
 });

@@ -2,7 +2,7 @@
     <form class="form-inline" @submit.prevent="addTodo">
         <div class="form-group">
             <label for="todo" class="sr-only">Todo</label>
-            <input type="text" v-model="name" class="form-control" id="todo" placeholder="Enter a todo...">
+            <input type="text" v-model="name" class="form-control" id="todo" placeholder="Enter a todo..." />
         </div>
         <input type="button" value="Add" @click="addTodo" class="btn btn-default"/>
     </form>
@@ -19,10 +19,10 @@ export default class AddTodo extends Vue {
 
     addTodo(): void {
       this.$store.commit({
-        type: "addTodo", 
-        name: this.name
-      });
-       this.name = "";
+            type: "addTodo", 
+            name: this.name
+        });
+        this.name = "";
     }
 };
 </script>

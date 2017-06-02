@@ -1,10 +1,12 @@
 <template>
-  <tr>
-    <td :class="{ done: todo.done }"><router-link :to="{ name: 'TodoDetails', params:{ id: todo.id }}">{{ todo.name }}</router-link></td>
-    <td>
-      <input type="checkbox" v-model="done" />
-    </td>
-  </tr>
+  <transition enter-active-class="animated fadeInLeft">
+    <tr>
+      <td :class="{ done: todo.done }"><router-link :to="{ name: 'TodoDetails', params:{ id: todo.id }}">{{ todo.name }}</router-link></td>
+      <td>
+        <input type="checkbox" v-model="done" />
+      </td>
+    </tr>
+  </transition>
 </template>
 
 <script lang="ts">

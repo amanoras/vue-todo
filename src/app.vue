@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <transition enter-active-class="animated slideInDown">
+      <router-view></router-view>
+    </transition>
   </div>
   </div>
 </template>

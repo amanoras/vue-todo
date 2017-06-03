@@ -32,11 +32,12 @@ export default class TodoDetail extends Vue {
   
   get name(): string{
     let todo = this.$store.getters.getTodo(this.$props.id);
-
+    
     if(!todo){
-      return "";
+      return this.newName;
     }
 
+    this.newName = todo.name;
     return todo.name;
   };
 
@@ -48,9 +49,10 @@ export default class TodoDetail extends Vue {
     let todo = this.$store.getters.getTodo(this.$props.id);
 
     if(!todo){
-      return false;
+      return this.newStatus;
     }
 
+    this.newStatus = todo.done;
     return todo.done;
   };
 

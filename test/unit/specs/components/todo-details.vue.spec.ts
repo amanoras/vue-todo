@@ -4,8 +4,8 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 import TodoDetails from "@/components/todo-details.vue";
-import { state } from "@/../test/helpers/mock_store"
-import { mutations, getters } from "@/store"
+import { state } from "@/../test/helpers/mock_store";
+import { mutations, getters } from "@/store";
 
 import { Todo } from "@/todos"
 
@@ -14,7 +14,39 @@ describe("todo-details.vue", () => {
         todoDetails: HTMLElement;
 
     describe("component setup", () => {
+        it("should initialise newName with name value", () => {
+            state.todoList = [ new Todo(1, "Something", true) ];
+            let options = {
+                propsData: {
+                    id: 1
+                },
+                store: new Vuex.Store({
+                    state,
+                    getters,
+                    mutations
+                })
+            };
+            vm = render(TodoDetails, options);
 
+            expect(vm.newName).toBe("Something");
+        });
+
+        it("should initialise newStatus with done value", () => {
+            state.todoList = [ new Todo(1, "Something", true) ];
+            let options = {
+                propsData: {
+                    id: 1
+                },
+                store: new Vuex.Store({
+                    state,
+                    getters,
+                    mutations
+                })
+            };
+            vm = render(TodoDetails, options);
+
+            expect(vm.newStatus).toBe(true);
+        });
     });
 
     describe("name", () => {
